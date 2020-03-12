@@ -271,4 +271,351 @@ li[data-type="single"] {
 
 * 最重要的
   1. 本地调试代码和 `debugger` 不要提交到 SVN 或者 GIT 仓库
-  2. 语义化命名，减少无用代码、增强可读性
+  2. 同一个作用域内变量声明全部放到顶部，逻辑代码在下面
+  3. 语义化命名，减少无用代码、增强可读性
+
+* 关于空格
+
+  1. 二元运算符前后和三元运算符 '?:' 前后要加空格
+  2. 代码块 '{' 前要加空格
+  3. 下列关键字前：`else`, `while`, `catch`, `finally`要加空格
+  4. 下列关键字后：`if`, `else`, `for`, `while`, `do`, `switch`, `case`, `try`, `catch`, `finally`, `with`, `return`, `typeof`要加空格
+  5. 单行注释 '//' 后（若单行注释和代码同行，则 '//' 前也需要），多行注释 '*' 后加空格
+  6. 对象的属性值前加空格
+  7. for循环，分号后留有一个空格，前置条件如果有多个，逗号后留一个空格
+  8. 函数的参数之间
+
+  ```javascript
+  // bad
+  var a = {
+      b :1
+  }
+  
+  // good
+  var a = {
+      b: 1
+  }
+  
+  // bad
+  ++ x
+  y ++
+  z = x?1:2
+  
+  // good
+  ++x
+  y++
+  z = x ? 1 : 2
+  
+  // bad
+  var a = [ 1, 2 ]
+  
+  // good
+  var a = [1, 2]
+  
+  // bad
+  var a = ( 1+2 )*3
+  
+  // good
+  var a = (1 + 2) * 3
+  var doSomething = function(a, b, c){
+      // do something
+  };
+  doSomething(item)
+  
+  // bad
+  for(i=0;i<6;i++){
+      x++;
+  }
+  // good
+  for (i = 0; i < 6; i++) {
+      x++
+  }
+  
+  // bad
+  if(condition){
+      // do something
+  }else{
+      // do something
+  }
+  // good
+  if (condition) {
+      // do something
+  } else {
+      // do something
+  }
+  ```
+
+  
+
+* 注释
+  1. 双斜线后，必须跟一个空格
+  2. 缩进与下一行代码保持一致
+  3. 可位于一个代码行的末尾，与代码间隔一个空格
+  4. 多行注释最少三行, '*' 后跟一个空格
+  5. 通用工具函数方法使用文档注释，需完善功能、参数等信息
+
+    ```javascript
+if (condition) {
+    // 这里是注释
+    allowed();
+}
+
+let zhangsan = 'zhangsan' // 这里是注释
+
+/*
+ * 这里写注释
+ */
+let x = 1
+
+/**
+ * @func
+ * @desc 一个带参数的函数
+ * @param {string} a - 参数a
+ * @param {number} b=1 - 参数b默认值为1
+ * @param {string} c=1 - 参数c有两种支持的取值</br>1—表示x</br>2—表示xx
+ * @param {object} d - 参数d为一个对象
+ * @param {string} d.e - 参数d的e属性
+ * @param {string} d.f - 参数d的f属性
+ * @param {object[]} g - 参数g为一个对象数组
+ * @param {string} g.h - 参数g数组中一项的h属性
+ * @param {string} g.i - 参数g数组中一项的i属性
+ * @param {string} [j] - 参数j是一个可选参数
+ */
+function foo(a, b, c, d, g, j) {
+    // do something
+}
+    ```
+
+* 引号
+
+  优先使用单引号，如有多层嵌套最外层统一使用单引号。
+
+```javascript
+// bad
+let x = "test"
+
+// good
+let y = 'foo',
+    z = '<div id="test"></div>'
+```
+
+* 需要注意的
+  1. 优先使用 '===' 和 '!==' 进行判断
+  2. 不要在内置对象的原型上添加方法，如Array, Date
+  3. 不要在内层作用域的代码里声明了变量，之后却访问到了外层作用域的同名变量
+  4. 变量不要先使用后声明
+  5. 不要在一句代码中单单使用构造函数，记得将其赋值给某个变量
+  6. 不要在同个作用域下声明同名变量
+  7. 不要在一些不需要的地方加括号，例：delete(a.b)
+  8. 不要使用未声明的变量（全局变量需要加到.jshintrc文件的globals属性里面）
+  9. 不要声明了变量却不使用
+  10. 不要在应该做比较的地方做赋值
+  11. 数组中不要存在空元素
+  12. 不要在循环内部声明函数
+  13. 不要像这样使用构造函数，例：`new function () { ... }`, `new Object`
+
+```javascript
+// bad
+if (a == 1) {
+    a++
+}
+
+// good
+if (a === 1) {
+    a++
+}
+
+// bad
+Array.prototype.count = function(value){
+    return 4
+}
+
+// bad
+var x = 1
+function test(){
+    if (true) {
+        var x = 0
+    }
+    x += 1
+}
+
+// bad
+function test(){
+    console.log(x)
+
+    var x = 1
+}
+
+// bad
+new Person()
+
+// good
+var person = new Person()
+
+// bad
+delete(obj.attr)
+
+// good
+delete obj.attr
+
+// bad
+if (a = 10) {
+    a++
+}
+
+// bad
+var a = [1, , , 2, 3]
+
+// bad
+var nums = []
+for (var i = 0; i < 10; i++) {
+    (function(i) {
+        nums[i] = function(j) {
+            return i + j
+        }
+    }(i))
+}
+
+// bad
+var singleton = new function(){
+    var privateVar
+
+    this.publicMethod = function(){
+        privateVar = 1
+    }
+
+    this.publicMethod2 = function(){
+        privateVar = 2
+    }
+}
+```
+
+
+
+
+
+## VUE 规范
+
+* 需要注意的
+
+  vue 页面模板要 <template> 标签在最前面，<script> 标签在中间，<style> 标签在最后，VSCode 推荐使用 Vue VSCode Snippets 插件快捷生成模板。
+
+  vue 页面模板只留下需要用到的就行，如果只用到了 methods ，那就不要写其他的，尽量使代码简洁。
+
+* 模块化开发
+
+  一个 vue 文件代码行数禁止超过 500 行，要把页面细分为多个组件，页面只是用来组合多个组件展示，以此来实现低耦合、高复用性。例如：一个有 3 个表单、两个弹窗的 vue 页面
+
+  ```javascript
+  <template>
+      <!-- 建议用省略写法 -> : 代替 v-bind: -->
+      <my-form1 :options="options" />
+      <my-form2 :options="options" />
+      <my-form3 :options="options" />
+  
+      <my-dialog1 :options="options" />
+      <my-dialog2 :options="options" />
+  </template>
+  <script>
+      import myForm1 from '...'
+      import myForm2 from '...'
+      import myForm3 from '...'
+      import myDialog1 from '...'
+      import myDialog2 from '...'
+  	export default{
+          components: {
+              myForm1,
+              myForm2,
+              myForm3,
+              myDialog1,
+              myDialog2
+          }
+      }
+  </script>
+  ```
+
+* 开发目录
+
+  apis 文件用来放所有的请求、assets 放所有资源、components 放所有的通用组件、views 放页面、router 放路由、store 放 vuex 相关、utils 放所有的工具函数、styles 放公共样式文件，components 和 views 下的组件和页面都要放在文件里，页面或组件的单独组件要放到个文件夹的 components 文件夹。
+
+```
+src
+│  App.vue
+│  main.js
+│
+├─api
+│      api.js
+│      axiosConfig.js
+│
+├─assets
+│  ├─font-icon
+│  │      iconfont.ttf
+│  │
+│  └─images
+│          ava.jpg
+│
+├─components
+│  ├─adminDrawer
+│  │      index.vue
+│  │
+│  ├─adminMenu
+│  │      index.vue
+│  │
+│  ├─bolgHeader
+│  │      index.vue
+│  │
+│  ├─editor
+│  │      index.vue
+│  │
+│  └─websiteNotice
+│          index.vue
+│
+├─router
+│      routerConfig.js
+│      routerMap.js
+│
+├─store
+│  │  store.js
+│  │
+│  └─modules
+│          artical.js
+│          user.js
+│
+├─styles
+│      common.styl
+│
+└─views
+    ├─404
+    │      index.vue
+    │
+    ├─addArtical
+    │      index.vue
+    │
+    ├─articalDetail
+    │      index.vue
+    │
+    ├─articals
+    │  │  index.vue
+    │  │
+    │  └─components
+    │          dataTable.vue
+    │          searchRow.vue
+    │
+    ├─articalTypes
+    │  │  index.vue
+    │  │
+    │  └─components
+    │          dataTable.vue
+    │
+    ├─auth
+    │      authBox.vue
+    │      login.vue
+    │      register.vue
+    │
+    ├─deletedArtical
+    │      index.vue
+    │
+    └─layout
+            index.vue
+```
+
