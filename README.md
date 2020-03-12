@@ -270,6 +270,7 @@ li[data-type="single"] {
 ## JavaScript 规范
 
 * 最重要的
+
   1. 本地调试代码和 `debugger` 不要提交到 SVN 或者 GIT 仓库
   2. 同一个作用域内变量声明全部放到顶部，逻辑代码在下面
   3. 语义化命名，减少无用代码、增强可读性
@@ -348,41 +349,42 @@ li[data-type="single"] {
   
 
 * 注释
+
   1. 双斜线后，必须跟一个空格
   2. 缩进与下一行代码保持一致
   3. 可位于一个代码行的末尾，与代码间隔一个空格
   4. 多行注释最少三行, '*' 后跟一个空格
   5. 通用工具函数方法使用文档注释，需完善功能、参数等信息
 
-    ```javascript
+```javascript
 if (condition) {
-    // 这里是注释
-    allowed();
+  // 这里是注释
+  allowed();
 }
-  
-  /*
-   * 这里是注释
-   */
-  let x = 1
-  
-  /**
-   * @func
-   * @desc 一个带参数的函数
-   * @param {string} a - 参数a
-   * @param {number} b=1 - 参数b默认值为1
-   * @param {string} c=1 - 参数c有两种支持的取值</br>1—表示x</br>2—表示xx
-   * @param {object} d - 参数d为一个对象
-   * @param {string} d.e - 参数d的e属性
-   * @param {string} d.f - 参数d的f属性
-   * @param {object[]} g - 参数g为一个对象数组
-   * @param {string} g.h - 参数g数组中一项的h属性
-   * @param {string} g.i - 参数g数组中一项的i属性
-   * @param {string} [j] - 参数j是一个可选参数
-   */
-  function foo(a, b, c, d, g, j) {
-      // do something
-  }
-    ```
+
+/*
+ * 这里是注释
+ */
+let x = 1
+
+/**
+ * @func
+ * @desc 一个带参数的函数
+ * @param {string} a - 参数a
+ * @param {number} b=1 - 参数b默认值为1
+ * @param {string} c=1 - 参数c有两种支持的取值</br>1—表示x</br>2—表示xx
+ * @param {object} d - 参数d为一个对象
+ * @param {string} d.e - 参数d的e属性
+ * @param {string} d.f - 参数d的f属性
+ * @param {object[]} g - 参数g为一个对象数组
+ * @param {string} g.h - 参数g数组中一项的h属性
+ * @param {string} g.i - 参数g数组中一项的i属性
+ * @param {string} [j] - 参数j是一个可选参数
+ */
+function foo(a, b, c, d, g, j) {
+    // do something
+}
+```
 
 * 引号
 
