@@ -36,7 +36,7 @@
   function getList(){...}
   const getList = () => {...}
   
-  // 构造函数命名首字母必须大写  大驼峰命名
+  // 构造函数命名和类名首字母必须大写  大驼峰命名
   // bad
   function person(name){
       this.name = name
