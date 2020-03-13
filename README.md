@@ -520,8 +520,8 @@ var singleton = new function(){
       import myForm1 from '...'
       import myForm2 from '...'
       import myForm3 from '...'
-      import myDialog1 from '...'
-      import myDialog2 from '...'
+      import myDialog1 from './components/myForm1'
+      import myDialog2 from './components/myForm2'
   	export default{
           components: {
               myForm1,
