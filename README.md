@@ -498,7 +498,7 @@ var singleton = new function(){
 
 * 需要注意的
 
-  vue 页面模板要 <template> 标签在最前面，<script> 标签在中间，<style> 标签在最后，VSCode 推荐使用 Vue VSCode Snippets 插件快捷生成模板。
+  vue 页面模板要 <template>  标签在最前面，<script> 标签在中间，<style> 标签在最后，VSCode 推荐使用 Vue VSCode Snippets 插件快捷生成模板。
 
   vue 页面模板只留下需要用到的就行，如果只用到了 methods ，那就不要写其他的，尽量使代码简洁。
 
